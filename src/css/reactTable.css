@@ -1,0 +1,48 @@
+.table-wrapper {
+    display: flex;            /* Use flexbox to control layout */
+    flex-direction: column;  /* Align children in a column */
+    justify-content: flex-start; /* Align items to the start */
+    align-items: stretch;     /* Ensure children stretch to fill the container */
+    height: 50%;      
+    margin-top: 5%;     /* Take full height of the parent */
+}
+
+.table-container {
+    height: 10%; /* Set the maximum height for the table container */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+    border: 1px solid #ddd; /* Optional: border for aesthetics */
+    border-radius: 5px; /* Optional: rounded corners */
+    flex-grow: 1; /* Allow the table to grow and fill available space */
+}
+
+.custom-table {
+    width: 100%; /* Make the table width 100% of the container */
+    border-collapse: collapse; /* Merge borders of table cells */
+}
+
+.custom-table th, .custom-table td {
+    padding: 10px; /* Padding for table cells */
+    text-align: left; /* Align text to the left */
+    border-bottom: 1px solid #ddd; /* Bottom border for table cells */
+}
+
+.custom-table th {
+    background-color: #f2f2f2; /* Background color for table headers */
+}
+
+.form-control-2 {
+    display: block;
+    width: 300px !important;  /* Ensure full width */
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #777;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: 8px;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    
+}
