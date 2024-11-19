@@ -11,6 +11,9 @@ import {
 } from "../../api/feedingRoutineApi";
 import { formatDate } from "../../util/getFormatedDateAndTIme";
 import { toast } from "react-toastify";
+import TimePicker from 'react-time-picker';
+import "../../../src/css/timepicker.css";
+
 /* eslint-disable */
 function AddModalForFeedingRoutine({ handleIsOPen, isOpen, feedingRoutineId }) {
   const [data, setData] = useState({
@@ -22,8 +25,9 @@ function AddModalForFeedingRoutine({ handleIsOPen, isOpen, feedingRoutineId }) {
   const [singleFeedingRoutine, setSingleFeedingRoutine] = useState([]);
   const [livestock, setLiveStock] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
+  const [time, setTime] = useState('10:00');
 
-  const getFeedRoutine = async( value) =>{
+  const getFeedRoutine = async (value) => {
     setSingleFeedingRoutine([])
     try {
       const resp = await getFeedingRoutineAgainstId(value);
@@ -45,31 +49,31 @@ function AddModalForFeedingRoutine({ handleIsOPen, isOpen, feedingRoutineId }) {
     }));
   };
 
-  const getFeedingRoutineByIds = async () =>{
-    try{
+  const getFeedingRoutineByIds = async () => {
+    try {
       const resp = await getFeedingRoutineById(feedingRoutineId);
       await getFeedRoutine(resp?.livestock_id?._id)
       setData({
-        livestock_id: resp?.livestock_id?._id ,
+        livestock_id: resp?.livestock_id?._id,
         feeding_time: resp?.feeding_time,
-        feed_type: resp?.feed_type ,
-        quantity: resp?.quantity ,
+        feed_type: resp?.feed_type,
+        quantity: resp?.quantity,
       });
-    }catch(err){
+    } catch (err) {
       console.error(err);
     }
   }
   useEffect(() => {
-    if(feedingRoutineId){
+    if (feedingRoutineId) {
       setIsEdit(true);
       getLiveStock();
       getFeedingRoutineByIds();
-    }else{
+    } else {
       setIsEdit(false);
       getLiveStock();
-  
+
     }
-   
+
   }, []);
 
   const getLiveStock = async () => {
@@ -82,29 +86,29 @@ function AddModalForFeedingRoutine({ handleIsOPen, isOpen, feedingRoutineId }) {
   };
 
   const handleSubmitData = async () => {
-    
+
     try {
-      if(isEdit){
+      if (isEdit) {
         const response = await editFeedingRoutine(feedingRoutineId, data);
-        if(response){
+        if (response) {
           handleIsOPen();
           setIsEdit(false)
           toast.success("Data edit successfully!");
-        
+
         }
       }
-      else{
+      else {
         const response = await createFeedingRoutine(data);
-        if(response){
+        if (response) {
           handleIsOPen();
           toast.success("Data saved successfully!");
-        
+
         }
       }
 
     } catch (e) {
       console.log(e);
-      toast.error("SOmething went wrong !!");
+      toast.error("Something went wrong !!");
       setIsEdit(false)
     }
   };
@@ -127,47 +131,58 @@ function AddModalForFeedingRoutine({ handleIsOPen, isOpen, feedingRoutineId }) {
               <Form.Label>Live Stock</Form.Label>
 
 
-                <Form.Select
-                  aria-label="Default select example"
-                  onChange={(e) => handleChange(e)}
-                  value={data.livestock_id}
-                  name="livestock_id"
-                >
-                  <option value=""  selected> 
-                    Choose Live Stock
+              <Form.Select
+                aria-label="Default select example"
+                onChange={(e) => handleChange(e)}
+                value={data.livestock_id}
+                name="livestock_id"
+              >
+                <option value="" selected>
+                  Choose Live Stock
+                </option>
+                {livestock?.map((liv) => (
+                  <option key={`${liv?._id} + ${liv?.type}`} value={liv?._id}>
+                    {liv?.type}
                   </option>
-                  {livestock?.map((liv) => (
-                    <option key={`${liv?._id} + ${liv?.type}`} value={liv?._id}>
-                      {liv?.type}
-                    </option>
-                  ))}
-                </Form.Select>
-             
+                ))}
+              </Form.Select>
 
-                
-                  <Form.Label className="mt-1">Feeding Routine</Form.Label>
 
-                  <Form.Select
-                    aria-label="Default select example"
-                    onChange={(e) => handleChange(e)}
-                    value={data.feeding_time}
-                    name="feeding_time"
+
+              <Form.Label className="mt-1">Feeding Routine</Form.Label>
+
+              <Form.Select
+                aria-label="Default select example"
+                onChange={(e) => handleChange(e)}
+                value={data.feeding_time}
+                name="feeding_time"
+              >
+                <option value="" selected>
+                  Choose Feeding Routine
+                </option>
+                {singleFeedingRoutine?.map((feeding) => (
+                  <option
+                    key={`${feeding?._id} - ${feeding?.feeding_time}`}
+                    value={feeding?.feeding_time}
                   >
-                    <option value="" selected>
-                      Choose Feeding Routine
-                    </option>
-                    {singleFeedingRoutine?.map((feeding) => (
-                      <option
-                        key={`${feeding?._id} - ${feeding?.feeding_time}`}
-                        value={feeding?.feeding_time}
-                      >
-                        {formatDate(feeding?.feeding_time)}
-                      </option>
-                    ))}
-                  </Form.Select>
-  
+                    {formatDate(feeding?.feeding_time)}
+                  </option>
+                ))}
+              </Form.Select>
+
+             {/* <div className="mb-3 col-12">
+                <label className="form-label">Select a time:</label>
+                <TimePicker
+                  onChange={handleChange}
+                  value={}
+                  format="HH:mm"           // 24-hour format
+                  disableClock={true}      // Hide the clock icon
+                  className="custom-time-picker" // Apply Bootstrap form-control style
+                />
+              </div> */}
+
               <Form.Label className="mt-1">Feed Type</Form.Label>
-                <Form.Control
+              <Form.Control
                 type="text"
                 autoFocus
                 onChange={(e) => handleChange(e)}

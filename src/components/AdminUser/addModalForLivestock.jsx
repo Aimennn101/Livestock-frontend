@@ -14,17 +14,41 @@ function AddModalForLivestock({ handleIsOpen, isOpen, livestockId }) {
         weight: null,
         price: null,
         quantity: null,
+        rem_quantity: null
     });
+    const [tempData, setTempData] = useState(data)
     const [isEdit, setIsEdit] = useState(false);
 
 
     const handleChange = async (e) => {
+        // const { name, value } = e.target;
+        
+        // setData((prevData) => ({
+        //     ...prevData,
+        //     ...(name === "quantity" && { "rem_quantity": Math.abs(prevData["quantity"] - value) + prevData["rem_quantity"] }),
+        //     [name]: value,
+        // }));
+
         const { name, value } = e.target;
-        console.log(name, value, "value");
-        setData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
+        console.log(e.target,"e")
+
+        setData((prevData) => {
+            // Calculate new quantity value
+            const newQuantity = name === "quantity" ? parseFloat(value) : prevData["quantity"];
+            const prevQuantity = tempData["quantity"]
+            console.log(newQuantity,tempData["rem_quantity"],"quan")
+            // If the name is "quantity", update rem_quantity; otherwise, keep it as is
+            const newRemQuantity = name === "quantity" 
+                ? Math.abs(parseInt(newQuantity)) - ((tempData["rem_quantity"] == 0 || tempData["rem_quantity"] ? parseInt(tempData["quantity"]) - parseInt(tempData["rem_quantity"]): 0))
+                : parseInt(tempData["rem_quantity"]);
+                console.log(newRemQuantity, "new")
+            
+            return {
+                ...prevData,
+                [name]: value, // Always update the current field
+                rem_quantity: newRemQuantity // Update rem_quantity only when needed
+            };
+        });
     };
 
     const getLivestockAgainstId = async () => {
@@ -37,6 +61,16 @@ function AddModalForLivestock({ handleIsOpen, isOpen, livestockId }) {
                 weight: resp?.weight,
                 price: resp?.price,
                 quantity: resp?.quantity,
+                rem_quantity: resp?.rem_quantity,
+            });
+            setTempData({
+                type: resp?.type,
+                breed: resp?.breed,
+                age: resp?.age,
+                weight: resp?.weight,
+                price: resp?.price,
+                quantity: resp?.quantity,
+                rem_quantity: resp?.rem_quantity,
             });
         } catch (err) {
             console.error(err);

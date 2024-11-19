@@ -75,20 +75,18 @@ const ResourceManagement = () => {
           ) : data && data.length > 0 ? (
             data.map((res) => (
               <div className="col-lg-4 col-md-6 pt-5 wow fadeInUp" data-wow-delay="0.5s" key={res._id}>
-                <div className="service-item d-flex h-100">
+                <div className="service-item d-flex h-100 ">
                   <div className="service-img">
                     <img className="img-fluid" src={herhub} alt="" />
                   </div>
                   <div style={{ display: "flex", flexGrow: 2, justifyContent: "space-between", alignItems: "flex-start" }}>
-                    <div className="service-text p-5 pt-0">
+                    <div className="service-text p-5 pt-5">
                     <p className="mb-1"><b>Animal-Type :</b> {res?.feed_id?.livestock_id?.type}</p>
                       <p className="mb-1 "><b>Land Name:</b> {res?.land_id?.name}</p>
                       <p className="mb-1"><b>Location:</b> {res?.land_id?.location}</p>
                       <p className="mb-1"><b>Capacity:</b> {res?.land_id?.capacity}</p>
                       <p className="mb-1"><b>Feed-Type:</b> {res?.feed_id?.feed_type}</p>
                       <p className="mb-1"><b>Feed-Time:</b> {formatDate(res?.feed_id?.feeding_time)}</p>
-                      <p className="mb-1"><b>Animal Price:</b> {res?.animal_price}</p>
-                      
                       <p className="mb-1"><b>Labor:</b> {res?.labor}</p>
                     </div>
                   </div>
@@ -99,7 +97,7 @@ const ResourceManagement = () => {
                       </div>
                     </div>
                     <div className="col-icon">
-                      <div className="icon-danger" style={{ position: "relative", top: "150px", bottom: "20px", left: "-40px", color: "green", cursor: "pointer" }} onClick={() => { handleDelete(res?._id) }}>
+                      <div className="icon-danger" style={{ position: "relative", top: "250px", bottom: "20px", left: "-40px", color: "green", cursor: "pointer" }} onClick={() => { handleDelete(res?._id) }}>
                         <i className="fas fa-trash" style={{ color: "#BE2B44" }}></i>
                       </div>
                     </div>

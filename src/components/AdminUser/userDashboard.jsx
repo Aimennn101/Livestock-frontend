@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import "../../../src/css/addButton.css";
 import "react-multi-carousel/lib/styles.css";
 import "../../../src/css/vendor.css";
@@ -8,13 +7,16 @@ import cowBanner from "../../assets/cow-banner.png"
 import goatBanner from "../../assets/goat-banner.png"
 import goatCard from "../../assets/goat-card.jpg"
 import { useNavigate } from "react-router-dom";
+import goat from "../../assets/goat-card.jpg";
+import sheep from "../../assets/sheep.jpg"
+import cow from "../../assets/cow-card.jpg"
 
 const UserDashboard = () => {
     const navigate = useNavigate();
     const cards = [
-        { id: 1, value: "asd" },
-        { id: 2, value: "asd" },
-        { id: 2, value: "asd" }
+        { id: 1, animal: "Sheep", pic: sheep },
+        { id: 2, animal: "Goat", pic: goat },
+        { id: 2, animal: "Cow", pic: cow }
     ];
     return (
         <div data-bs-spy="scroll" data-bs-target="#navbar" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" tabindex="0">
@@ -111,20 +113,19 @@ const UserDashboard = () => {
                                 <div className=" d-flex align-items-center justify-content-between">
                                     {cards.length > 0 ?
                                         cards.map((res) =>
-                                        (<div className="product-card position-relative">
+                                        (<div className="product-card position-relative col-3">
                                             <div className="image-holder">
-                                                <img src={goatCard} alt="product-item" className="img-fluid" />
+                                                <img src={res?.pic} alt="product-item" className="img-fluid" />
                                             </div>
                                             <div className="cart-concern position-absolute col-3">
                                                 <div className="cart-button d-flex">
-                                                    <a href="#" className="btn btn-medium btn-black">Add to Cart<svg className="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                                                    <a onClick={()=>navigate("/shop-product")} className="btn btn-medium btn-black">Shop Product<svg className="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
                                                 </div>
                                             </div>
                                             <div className="card-detail d-flex justify-content-between align-items-baseline pt-3">
                                                 <p className="card-title text-uppercase">
-                                                    <a href="#">Goat</a>
+                                                    <a href="#">{res?.animal}</a>
                                                 </p>
-                                                <span className="item-price text-primary">Pkr 2000</span>
                                             </div>
                                         </div>
                                         )) : ""

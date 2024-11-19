@@ -10,8 +10,6 @@ import { getUserId } from "../../service/roles";
 function AddShelterSpaceModal({ handleIsOpen, isOpen, resourceId }) {
   const [data, setData] = useState({
     livestock_id: null,
-    animal_quantity: null,
-    size_in_kg: null,
     shelter_type: null,
     available_shelter: null,
     ventilation: null,
@@ -26,8 +24,6 @@ function AddShelterSpaceModal({ handleIsOpen, isOpen, resourceId }) {
       const resp = await getShelterSpaceById(resourceId);
       setData({
         livestock_id: resp?.livestock_id?._id,
-        animal_quantity: resp?.animal_quantity,
-        size_in_kg: resp?.size_in_kg,
         shelter_type: resp?.shelter_type,
         available_shelter: resp?.available_shelter,
         resting_area: resp?.resting_area,
@@ -68,7 +64,7 @@ function AddShelterSpaceModal({ handleIsOpen, isOpen, resourceId }) {
 
   const handleSubmitData = async () => {
     data.user_id = getUserId();
-    data.ventilation = 'window';
+    data.ventilation = 'Window';
     try {
       if (isEdit && resourceId) {
         const res = await editShelterSpace(resourceId, data);
@@ -112,7 +108,7 @@ function AddShelterSpaceModal({ handleIsOpen, isOpen, resourceId }) {
               <Form.Select
                 aria-label="Default select example"
                 onChange={(e) => handleChange(e)}
-                value={data.livestock_id}
+                value={data.livestock_id} 
                 name="livestock_id"
               >
                 <option value="" selected>
@@ -120,27 +116,12 @@ function AddShelterSpaceModal({ handleIsOpen, isOpen, resourceId }) {
                 </option>
                 {livestock?.map((liv) => (
                   <option key={`${liv?._id} + ${liv?.type}`} value={liv?._id}>
-                    {liv?.type}
+                    {liv?.type} - {liv?.breed}
                   </option>
                 ))}
 
               </Form.Select>
-              <Form.Label className="mt-1">Number Of Animal</Form.Label>
-              <Form.Control
-                type="number"
-                autoFocus
-                onChange={(e) => handleChange(e)}
-                value={data.animal_quantity}
-                name="animal_quantity"
-              />
-              <Form.Label className="mt-1">Animal Size/Weight (in kg/lb)</Form.Label>
-              <Form.Control
-                type="number"
-                autoFocus
-                onChange={(e) => handleChange(e)}
-                value={data.size_in_kg}
-                name="size_in_kg"
-              />
+           
               <Form.Label className="mt-1">Shlters Type</Form.Label>
               <Form.Select
                 aria-label="Default select example"
@@ -171,7 +152,7 @@ function AddShelterSpaceModal({ handleIsOpen, isOpen, resourceId }) {
                 type="text"
                 autoFocus
                 onChange={(e) => handleChange(e)}
-                value='window'
+                value='Window'
                 disabled
                 name="ventilation"
               />
