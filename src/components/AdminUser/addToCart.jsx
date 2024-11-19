@@ -69,13 +69,21 @@ export default function Cart() {
         const index = data.findIndex(res => res._id === id);
         if (type == "minus") {
             if(parseInt(document.getElementById("quantityInput" + id).value) > 0) {
-            
-            console.log(value, "va")
             document.getElementById("quantityInput" + id).stepDown();
             data[index]["quantity"] = document.getElementById("quantityInput" + id).value;
             total.current -= value;
             setAmnt(total.current);
+            }
         }
+        else if (type == "input") {
+            if((parseInt(document.getElementById("quantityInput" + id).value) > 0 ) && (parseInt(document.getElementById("quantityInput" + id).value)) <= quantity) {
+            data[index]["quantity"] = document.getElementById("quantityInput" + id).value;
+            total.current = parseInt(data[index]["quantity"]) * parseInt(value);
+            setAmnt(total.current);
+            }
+            else {
+                toast.warn("Count is not within the range")
+            }
         }
         else {
             if(quantity > parseInt(document.getElementById("quantityInput" + id).value)) {
@@ -215,7 +223,7 @@ export default function Cart() {
                                                         </button>
 
                                                         <MDBInput id={"quantityInput" + res?._id} defaultValue={1} min={0} max={res?.shelterspace_id?.rem_quantity}
-                                                            type="number" label={"Available Quantity: " + res?.shelterspace_id?.livestock_id?.rem_quantity} />
+                                                            type="number" label={"Available Quantity: " + res?.shelterspace_id?.livestock_id?.rem_quantity} onKeyUp={()=> updateTotal(res._id, res?.shelterspace_id?.livestock_id?.price, res?.shelterspace_id?.livestock_id?.rem_quantity, "input")}/>
                                                         <button className="btn btn-primary px-3 ms-2" onClick={() => updateTotal(res._id, res?.shelterspace_id?.livestock_id?.price, res?.shelterspace_id?.livestock_id?.rem_quantity, "plus")}>
                                                             <MDBIcon fas icon="plus" />
                                                         </button>
