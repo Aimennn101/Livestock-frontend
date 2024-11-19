@@ -45,23 +45,23 @@ const DashNavbar = () => {
                     <div className="collapse navbar-collapse" id="navbarResponsive">
                         {role == "user" &&
                             <>
-                                <p className="navbar-nav" style={{ color: "black", fontWeight: "bold", fontSize: "25px" }}>Herhub</p>
+                                <h2 className="navbar-nav" style={{ color: "black", fontWeight: "bold", fontSize: "25px" }}>Herhub</h2>
                                 <ul className="navbar-nav mx-auto">
                                     <li className="nav-item">
                                         <a className="nav-link" style={{ cursor: "pointer" }} onClick={() => navigate('/')}>Home</a>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link" style={{ cursor: "pointer" }} onClick={() => navigate('/shop-product')}>Shop Products</a>
-                                    </li>
-                                    <li className="nav-item">
                                         <a className="nav-link" style={{ cursor: "pointer" }} onClick={() => navigate('/vet-appointment')}>Vet Appointment</a>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link" style={{ cursor: "pointer" }} onClick={() => navigate('/orders')}>My Orders</a>
+                                        <a className="nav-link" style={{ cursor: "pointer" }} onClick={() => navigate('/shop-product')}>Shop Products</a>
                                     </li>
                                     <li className="nav-item">
                                         <a className="nav-link" style={{ cursor: "pointer" }} onClick={() => navigate('/cart')}>My Cart
                                         </a>
+                                    </li>
+                                    <li className="nav-item">
+                                        <a className="nav-link" style={{ cursor: "pointer" }} onClick={() => navigate('/orders')}>My Orders</a>
                                     </li>
                                 </ul>
                             </>

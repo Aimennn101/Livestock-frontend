@@ -34,6 +34,7 @@ export const createLivestock = async (livestock) => {
   
   export const editLivestock = async (livestockId, livestock) => {
     livestock["owner_id"] = getUserId();
+    // livestock["rem_quantity"] = parseInt(livestock["rem_quantity"])
     try {
       const response = await api.put(`/livestock/${livestockId}`, livestock);
       return response.data;

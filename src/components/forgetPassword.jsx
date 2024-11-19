@@ -71,10 +71,10 @@ const ForgetPassword = () => {
   };
 
   return (
-    <div className={`${authenticated ? "wrapper ps-5 pl-5" : "container-fluid px-0"}`}>
-      {authenticated ? <DashSidebar /> : <TopbarComponent />}
-      {authenticated ?  <DashNavbar />: <NavbarComponent />}
-      <div className="px-4 py-5 px-md-5 text-center text-lg-start" style={{ backgroundColor: "hsl(0, 0%, 96%)" }}>
+    <section className={`${authenticated && selectedRole != "user" ? "constainer-fluid wrapper ps-5 pl-5" : "container-fluid px-0"}`} style={{width: "100vw"}}>
+      <div>{authenticated ?  (selectedRole != "user" && <DashSidebar />) : <TopbarComponent />}</div>
+      {authenticated ? <DashNavbar />: <NavbarComponent />}
+      <div className="py-5 text-center text-lg-start" style={{ backgroundColor: "hsl(0, 0%, 96%)" }}>
         <div className="container">
           <div className="row align-items-center d-flex justify-content-center">
             <div className="col-lg-5 col-md-8 col-9 col-sm-9 mb-lg-0">
@@ -101,8 +101,8 @@ const ForgetPassword = () => {
           </div>
         </div>
       </div>
-     <Footer />
-    </div>
+      < Footer />
+    </section>
   );
 };
 

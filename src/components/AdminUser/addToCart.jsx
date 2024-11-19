@@ -89,7 +89,7 @@ export default function Cart() {
 
     const handlePurchase = async () => {
         const purchasePromises = data.map((res) =>
-            purchaseItem(res?.shelterspace_id?._id, res?.quantity, res?._id)
+            purchaseItem(res?.shelterspace_id?._id, res?.quantity, res?._id, res?.shelterspace_id?.livestock_id?._id)
         );
 
         try {
@@ -272,7 +272,7 @@ export default function Cart() {
                                             <div>
                                                 <strong>Total amount</strong>
                                                 <strong>
-                                                    <p className="mb-0">(including VAT)</p>
+                                                    <p className="mb-0">(including Tax)</p>
                                                 </strong>
                                             </div>
                                             <span>
@@ -281,9 +281,9 @@ export default function Cart() {
                                         </MDBListGroupItem>
                                     </MDBListGroup>
 
-                                    <MDBBtn block size="lg" onClick={handlePurchase}>
+                                    <button className="btn btn-primary" onClick={handlePurchase}>
                                         Checkout
-                                    </MDBBtn>
+                                    </button>
                                 </MDBCardBody>
                             </MDBCard>
                         </MDBCol>

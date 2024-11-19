@@ -23,12 +23,14 @@ export const getUserPurchases = async () => {
     }
 }
 
-export const purchaseItem = async (shelter_id, quantity, cart_id) => {
+export const purchaseItem = async (shelter_id, quantity, cart_id, livestock_id) => {
+  console.log(livestock_id, "live")
     const purchase = {
         shelter_id: shelter_id,
         user_id: getUserId(),
         quant: quantity,
-        cart_id: cart_id
+        cart_id: cart_id,
+        livestock_id: livestock_id
     }
     try {
         const response = await api.post("/user-purchase", purchase);

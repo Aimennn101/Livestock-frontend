@@ -68,7 +68,7 @@ const Profile = () => {
 
     return (
         <div className="wrapper">
-        <DashSidebar></DashSidebar>
+        {role != "user" && <DashSidebar></DashSidebar>}
         <DashNavbar></DashNavbar>
         <div className="container rounded bg-white mt-5 mb-5">
             <div className="row">

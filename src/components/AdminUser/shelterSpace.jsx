@@ -102,7 +102,7 @@ const ShelterSpace = () => {
                         <b>LiveStock:</b> {res?.livestock_id?.type}
                       </p>
                       <p className="mb-1">
-                        <b>Size in kg/lb:</b> {res?.size_in_kg}
+                        <b>Weight:</b> {res?.livestock_id?.weight}
                       </p>
                       <p className="mb-1">
                         <b>Ventilation:</b> {res?.ventilation}

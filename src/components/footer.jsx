@@ -3,12 +3,12 @@ import React from 'react';
 const Footer = () => {
   return (
     <footer>
-      <div className="container-fluid bg-dark footer py-5 fadeIn" data-wow-delay="0.1s">
+      <div className="container-fluid bg-dark footer py-5 fadeIn" data-wow-delay="0.1s" style={{width: "100vw"}}>
         <div className="container py-5">
             <div className="row container-fluid">
                 <div className="col-lg-3 col-md-6">
                     <h5 className="text-white mb-4">Our Office</h5>
-                    <p className="mb-2"><i className="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
+                    <p className="mb-2"><i className="fa fa-map-marker-alt me-3"></i>123 Street, Lahore, Pakistan</p>
                     <p className="mb-2"><i className="fa fa-phone-alt me-3"></i>+012 345 67890</p>
                     <p className="mb-2"><i className="fa fa-envelope me-3"></i>info@example.com</p>
                     <div className="d-flex pt-3">

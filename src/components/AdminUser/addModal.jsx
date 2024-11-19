@@ -12,8 +12,7 @@ function AddModal({ handleIsOpen, isOpen, resourceId }) {
   const [data, setData] = useState({
     land_id: null,
     feed_id: null,
-    labor: null,
-    animal_price:null
+    labor: null
   });
 
   const [shelters, setShelters] = useState([]);
@@ -23,12 +22,10 @@ function AddModal({ handleIsOpen, isOpen, resourceId }) {
   const getResourceAgainstId = async () =>{
     try{
       const resp = await getResourceById(resourceId);
-      console.log(resp,"response against Id")
       setData({
         land_id: resp?.land_id?._id ,
         feed_id: resp?.feed_id?._id ,
         labor: resp?.labor,
-        animal_price : resp?.animal_price
       });
     }catch(err){
       console.error(err);
@@ -52,7 +49,6 @@ function AddModal({ handleIsOpen, isOpen, resourceId }) {
   const getFeedingRoutine = async () => {
     try {
       const resp = await getFeedingRoutines();
-      console.log(resp,"response")
       setFeedingRoutine(resp);
     } catch(error) {
       console.error(error);
@@ -154,15 +150,6 @@ function AddModal({ handleIsOpen, isOpen, resourceId }) {
                 onChange={(e) => handleChange(e)}
                 value={data.labor}
                 name="labor"
-              />
-
-              <Form.Label className="mt-1">Animal Price</Form.Label>
-              <Form.Control
-                type="text"
-                autoFocus
-                onChange={(e) => handleChange(e)}
-                value={data.animal_price}
-                name="animal_price"
               />
             </Form.Group>
           </Form>

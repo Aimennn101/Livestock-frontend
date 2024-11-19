@@ -41,7 +41,6 @@ const Livestock = () => {
     if (window.confirm("Are you sure you want to delete this item")) {
       try {
         const response = await deleteLivestock(id);
-        console.log(response, "resp")
         if (response.deleted == 1) {
           toast.success(response.message);
           setData(data.filter(res => res._id !== id));

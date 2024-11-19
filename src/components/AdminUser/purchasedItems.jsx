@@ -36,7 +36,7 @@ function PurchasedItems() {
                                 display: "flex",
                                 justifyContent: "center",
                                 alignItems: "center",
-                                height: "50vh",
+                                height: "80vh",
                             }}
                         >
                             <Oval
@@ -63,7 +63,7 @@ function PurchasedItems() {
                                     <div style={{ display: "flex", flexGrow: 2, justifyContent: "space-between", alignItems: "flex-start" }}>
                                         <div className="service-text p-5 pt-0">
                                             <p className="mb-1 mt-5">
-                                                <b>LiveStock:</b> {res?.shelterspace_id?.livestock_id?.type}
+                                                <b>Livestock:</b> {res?.shelterspace_id?.livestock_id?.type}
                                             </p>
                                             <p className="mb-1">
                                                 <b>Breed:</b> {res?.shelterspace_id?.livestock_id?.breed}
@@ -84,41 +84,12 @@ function PurchasedItems() {
                                                 <b>Resting Area:</b> {res?.shelterspace_id?.resting_area}
                                             </p>
                                             <p className="mb-1">
-                                                <b>Price:</b> {res?.shelterspace_id?.livestock_id?.weight}
+                                                <b>Price:</b> {res?.shelterspace_id?.livestock_id?.price}
                                             </p>
                                             <p className="mb-1">
                                                 <b>Quantity:</b> {res?.bought_quantity}
                                             </p>
                                         </div>
-                                        {/* <div style={{ display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
-                                            <div className="col-icon">
-                                                <div
-                                                    className="icon-primary"
-                                                    style={{
-                                                        marginRight: "50px",
-                                                        marginTop: "40px",
-                                                        cursor: "pointer"
-                                                    }}
-                                                    onClick={() => {
-                                                        handleIsOpen(res?._id);
-                                                    }}
-                                                >
-                                                    <i className="fas fa-pen" style={{ color: "#EDDD5E" }}></i>
-                                                </div>
-                                            </div>
-                                            <div className="col-icon">
-                                                <div
-                                                    className="icon-danger"
-                                                    style={{
-                                                        marginTop: "165px",
-                                                        cursor: "pointer"
-                                                    }}
-                                                    onClick={() => handleDelete(res?._id)}
-                                                >
-                                                    <i className="fas fa-trash" style={{ color: "#BE2B44" }}></i>
-                                                </div>
-                                            </div>
-                                        </div> */}
                                     </div>
                                 </div>
                             </div>
@@ -126,14 +97,14 @@ function PurchasedItems() {
                     ) : (
                         <div
                             style={{
-                                height: "50vh",
+                                height: "80vh",
                                 width: "50vw",
                                 textAlign: "center",
                                 alignContent: "center",
                                 fontSize: "20px",
                             }}
                         >
-                            No purchases made.
+                            No purchases made
                         </div>
                     )}
                 </div>

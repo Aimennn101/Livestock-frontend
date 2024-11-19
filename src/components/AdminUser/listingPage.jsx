@@ -6,9 +6,7 @@ import {
     MDBCard,
     MDBCardBody,
     MDBCardImage,
-    MDBIcon,
     MDBRipple,
-    MDBBtn,
 } from "mdb-react-ui-kit";
 import DashNavbar from "./dashNavbar";
 import { useState, useEffect } from "react";
@@ -61,7 +59,7 @@ function listingPage() {
                                     display: "flex",
                                     justifyContent: "center",
                                     alignItems: "center",
-                                    height: "50vh",
+                                    height: "80vh",
                                 }}
                             >
                                 <Oval
@@ -104,7 +102,7 @@ function listingPage() {
                                                     <span className="text-muted ">Available Quantity: <b>{res?.livestock_id?.rem_quantity}</b></span>
                                                 </div>
                                                 <div className="mt-1 mb-1 text-muted medium">
-                                                    <span>Size: <b>{res?.size_in_kg} in kg/lb</b></span>
+                                                    <span>Size: <b>{res?.livestock_id?.weight} kg</b></span>
                                                     <span className="text-primary mx-1"> • </span>
                                                     <span>Ventilation: <b>{res?.ventilation}</b>
                                                         <br /></span>
@@ -141,7 +139,19 @@ function listingPage() {
                                         </MDBRow>
                                     </MDBCardBody>
                                 </MDBCard>
-                            ))) : ""}
+                            ))) : (
+                                <div
+                                    style={{
+                                        height: "90vh",
+                                        width: "800vw",
+                                        textAlign: "center",
+                                        alignContent: "center",
+                                        fontSize: "20px",
+                                    }}
+                                >
+                                    No products exist
+                                </div>
+                            )}
                     </MDBCol>
                 </MDBRow>
             </MDBContainer>
