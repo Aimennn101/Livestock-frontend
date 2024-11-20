@@ -11,7 +11,6 @@ import {
     MDBListGroupItem,
     MDBRipple,
     MDBRow,
-    MDBTooltip,
     MDBTypography,
 } from "mdb-react-ui-kit";
 import React from "react";

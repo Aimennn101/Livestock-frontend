@@ -86,7 +86,7 @@ const ResourceManagement = () => {
                       <p className="mb-1"><b>Location:</b> {res?.land_id?.location}</p>
                       <p className="mb-1"><b>Capacity:</b> {res?.land_id?.capacity}</p>
                       <p className="mb-1"><b>Feed-Type:</b> {res?.feed_id?.feed_type}</p>
-                      <p className="mb-1"><b>Feed-Time:</b> {formatDate(res?.feed_id?.feeding_time)}</p>
+                      <p className="mb-1"><b>Feed-Time:</b> {res?.feed_id?.feeding_time}</p>
                       <p className="mb-1"><b>Labor:</b> {res?.labor}</p>
                     </div>
                   </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo, useCallback } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
@@ -11,7 +11,7 @@ import {
 } from "../../api/feedingRoutineApi";
 import { formatDate } from "../../util/getFormatedDateAndTIme";
 import { toast } from "react-toastify";
-import TimePicker from 'react-time-picker';
+import TimePicker from '@ashwinthomas/react-time-picker-dropdown';
 import "../../../src/css/timepicker.css";
 
 /* eslint-disable */
@@ -25,7 +25,9 @@ function AddModalForFeedingRoutine({ handleIsOPen, isOpen, feedingRoutineId }) {
   const [singleFeedingRoutine, setSingleFeedingRoutine] = useState([]);
   const [livestock, setLiveStock] = useState([]);
   const [isEdit, setIsEdit] = useState(false);
-  const [time, setTime] = useState('10:00');
+
+
+  const MemoizedTimePicker = memo(TimePicker);
 
   const getFeedRoutine = async (value) => {
     setSingleFeedingRoutine([])
@@ -38,7 +40,6 @@ function AddModalForFeedingRoutine({ handleIsOPen, isOpen, feedingRoutineId }) {
   }
   const handleChange = async (e) => {
     const { name, value } = e.target;
-    console.log(name, value, "value");
     if (name === "livestock_id") {
       setSingleFeedingRoutine([])
       getFeedRoutine(value)
@@ -113,6 +114,19 @@ function AddModalForFeedingRoutine({ handleIsOPen, isOpen, feedingRoutineId }) {
     }
   };
 
+  const [selectedTime, setSelectedTime] = useState("10:10:00 am");
+
+  const handleTimeChange = useCallback((newTime) => {
+    if (newTime !== selectedTime) {
+      console.log(newTime, "new")
+      setData((prevData) => ({
+        ...prevData,
+        ["feeding_time"]: newTime,
+      }));
+      setSelectedTime(newTime);
+    }
+  }, [selectedTime]);
+
   return (
     <>
       <Modal
@@ -128,9 +142,7 @@ function AddModalForFeedingRoutine({ handleIsOPen, isOpen, feedingRoutineId }) {
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Live Stock</Form.Label>
-
-
+              <Form.Label>Livestock</Form.Label>
               <Form.Select
                 aria-label="Default select example"
                 onChange={(e) => handleChange(e)}
@@ -147,10 +159,7 @@ function AddModalForFeedingRoutine({ handleIsOPen, isOpen, feedingRoutineId }) {
                 ))}
               </Form.Select>
 
-
-
-              <Form.Label className="mt-1">Feeding Routine</Form.Label>
-
+              {/* <Form.Label className="mt-1">Feeding Routine</Form.Label>
               <Form.Select
                 aria-label="Default select example"
                 onChange={(e) => handleChange(e)}
@@ -168,18 +177,20 @@ function AddModalForFeedingRoutine({ handleIsOPen, isOpen, feedingRoutineId }) {
                     {formatDate(feeding?.feeding_time)}
                   </option>
                 ))}
-              </Form.Select>
+              </Form.Select> */}
 
-             {/* <div className="mb-3 col-12">
-                <label className="form-label">Select a time:</label>
-                <TimePicker
-                  onChange={handleChange}
-                  value={}
-                  format="HH:mm"           // 24-hour format
-                  disableClock={true}      // Hide the clock icon
-                  className="custom-time-picker" // Apply Bootstrap form-control style
-                />
-              </div> */}
+              <div>
+              <label className="form-label mt-2">Feeding Time</label>
+              <div className="col-12 px-0 d-flex align-items-center justify-content-center">
+                  <MemoizedTimePicker
+                    defaultValue={selectedTime}
+                    useTwelveHourFormat={true}
+                    className="col-12 tp_mainWrapper"
+                    style={{ display: "flex", flexGrow: 2 }}
+                    onTimeChange={handleTimeChange}
+                  />
+                </div>
+              </div>
 
               <Form.Label className="mt-1">Feed Type</Form.Label>
               <Form.Control

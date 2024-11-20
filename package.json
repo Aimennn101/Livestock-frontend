@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ashwinthomas/react-time-picker-dropdown": "^1.0.5",
     "@auth0/auth0-react": "^2.2.4",
     "@glidejs/glide": "^3.6.2",
     "@headlessui/react": "^2.1.2",

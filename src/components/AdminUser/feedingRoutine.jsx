@@ -102,7 +102,7 @@ const FeedingRoutine = () => {
                         <b>Feed Type:</b> {feed?.feed_type}
                       </p>
                       <p className="mb-1">
-                        <b>Routine:</b> {formatDate(feed?.feeding_time)}
+                        <b>Routine:</b> {feed?.feeding_time}
                       </p>
                     </div>
                   </div>

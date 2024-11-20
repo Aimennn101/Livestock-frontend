@@ -31,3 +31,10 @@
     display: none; /* Hide the clear button */
   }
   
+  .tp_mainWrapper .tp_inputWrapper {
+    width: 200%
+  }
+
+  /* .tp_iconWrapper {
+    width: 50%
+  } */
