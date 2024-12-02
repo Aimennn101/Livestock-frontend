@@ -95,7 +95,7 @@ export default function Cart() {
     }
 
     const handlePurchase = async () => {
-        if(data.findIndex(res => res.quantity == 0) > -1) {toast.error("Quantity can't be 0 for an item"); return}
+        if(data.findIndex(res => res.quantity <= 0) > -1) {toast.error("Quantity can't be 0 for an item"); return}
         const purchasePromises = data.map((res) =>
             purchaseItem(res?.shelterspace_id?._id, res?.quantity, res?._id, res?.shelterspace_id?.livestock_id?._id)
         );
