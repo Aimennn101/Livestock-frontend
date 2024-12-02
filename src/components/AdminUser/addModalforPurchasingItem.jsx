@@ -74,9 +74,7 @@ function PurchaseItemsModal({ handleIsOpen, isOpen, resourceId }) {
                                     <th scope="row">
                                         {res?.livestock_id?.type}
                                     </th>
-                                    <td>{res.size_in_kg}</td>
                                     <td>{res?.ventilation}</td>
-                                    <td>{res?.animal_quantity}</td>
                                     <td>{res?.available_shelter}</td>
                                     <td>{res?.shelter_type}</td>
                                     <td>{res?.resting_area}</td>
